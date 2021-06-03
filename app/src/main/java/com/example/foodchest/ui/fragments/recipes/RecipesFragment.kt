@@ -21,6 +21,7 @@ class RecipesFragment : Fragment() {
 
         view.recyclerview.showShimmer()
 
+
         return view
     }
 
