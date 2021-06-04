@@ -1,4 +1,4 @@
-package com.example.foodchest
+package com.example.foodchest.util
 
 class Constants {
     companion object{

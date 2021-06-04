@@ -1,4 +1,4 @@
-package com.example.foodchest
+package com.example.foodchest.data.network
 
 import com.example.foodchest.models.FoodRecipe
 import retrofit2.Response
