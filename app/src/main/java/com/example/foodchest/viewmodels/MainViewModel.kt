@@ -1,9 +1,8 @@
-package com.example.foodchest
+package com.example.foodchest.viewmodels
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -12,22 +11,21 @@ import com.example.foodchest.data.Repository
 import com.example.foodchest.models.FoodRecipe
 import com.example.foodchest.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 import javax.inject.Inject
 
-@ActivityRetainedScoped
 @HiltViewModel
-class MainViewModel @Inject constructor(
+//@ActivityRetainedScoped
+class MainViewModel @Inject  constructor(
     private val repository: Repository,
     application: Application
 ): AndroidViewModel(application) {
 
     var recipesResponse : MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
-    fun getRecicpes(queries: Map<String, String>) = viewModelScope.launch {
+    fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
     }
 
