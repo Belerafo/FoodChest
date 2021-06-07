@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="purple_200">#FFf07371</color>
+    <color name="primaryColor">#FFED413D</color>
+    <color name="primaryColorVariant">#FFb51310</color>
+    <color name="greeny_200">#FF30BB39</color>
+    <color name="greeny_700">#FF107916</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lightGrey">#FFf5f5f5</color>
-    <color name="lightMediumGrey">#FFc2c2c2</color>
-    <color name="mediumGrey">#FFa2a2a2</color>
-    <color name="darker">#FF1a1c1a</color>
-    <color name="darkGrey">#FF21211b</color>
+    <color name="mediumGrey">#FFc2c2c2</color>
+    <color name="lightMediumGrey">#FFa2a2a2</color>
+    <color name="dark">#FF131313</color>
+    <color name="darker">#FF0D0D0D</color>
+    <color name="darkGrey">#FF252525</color>
     <color name="red">#FFFF0000</color>
-    <color name="green">#FF00FF00</color>
+    <color name="green">#FF62DD6A</color>
     <color name="blue">#FF0000FF</color>
     <color name="yellow">#FFffdf00</color>
+
+    // Custom Chip Style
+    <color name="checkedChipBackgroundColor">#20ED413D</color>
+    <color name="chipBackgroundColor">@color/lightGrey</color>
+    <color name="checkedChipTextColor">#ED413D</color>
+    <color name="chipTextColor">@color/darkGrey</color>
     </resources>
