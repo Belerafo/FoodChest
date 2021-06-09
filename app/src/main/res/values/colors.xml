@@ -23,4 +23,6 @@
     <color name="chipBackgroundColor">@color/lightGrey</color>
     <color name="checkedChipTextColor">#ED413D</color>
     <color name="chipTextColor">@color/darkGrey</color>
+
+    <color name= "actionBarBackgroundColor">@color/primaryColor</color>
     </resources>
