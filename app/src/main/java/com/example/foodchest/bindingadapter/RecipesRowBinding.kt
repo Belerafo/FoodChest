@@ -12,6 +12,7 @@ import coil.load
 import com.example.foodchest.R
 import com.example.foodchest.models.Result
 import com.example.foodchest.ui.fragments.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 import org.w3c.dom.Text
 import java.lang.Exception
 
@@ -76,6 +77,15 @@ class RecipesRowBinding {
                         }
                     }
                 }
+        }
+
+        @BindingAdapter("parseHtml")
+        @JvmStatic
+        fun parseHtml(textView: TextView, description: String?){
+            if(description != null){
+                val desc = Jsoup.parse(description).text()
+                textView.text = desc
+            }
         }
 
     }
