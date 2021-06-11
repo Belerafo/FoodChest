@@ -2,12 +2,10 @@ package com.example.foodchest.viewmodels
 
 import android.app.Application
 import android.widget.Toast
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodchest.data.DataStoreRepository
-import com.example.foodchest.util.Constants
 import com.example.foodchest.util.Constants.Companion.API_KEY
 import com.example.foodchest.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.example.foodchest.util.Constants.Companion.DEFAULT_MEAL_TYPE
@@ -20,7 +18,6 @@ import com.example.foodchest.util.Constants.Companion.QUERY_NUMBER
 import com.example.foodchest.util.Constants.Companion.QUERY_SEARCH
 import com.example.foodchest.util.Constants.Companion.QUERY_TYPE
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
