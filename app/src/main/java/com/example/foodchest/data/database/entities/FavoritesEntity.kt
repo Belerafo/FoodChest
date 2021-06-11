@@ -1,4 +1,4 @@
-package com.example.foodchest.data.database.entites
+package com.example.foodchest.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.example.foodchest.data.database.entites
+package com.example.foodchest.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,6 +9,7 @@ import com.example.foodchest.util.Constants.Companion.RECIPES_TABLE
 class RecipesEntity (
     var foodRecipe: FoodRecipe
 ) {
+
 
     @PrimaryKey(autoGenerate = false)
     var id: Int = 0

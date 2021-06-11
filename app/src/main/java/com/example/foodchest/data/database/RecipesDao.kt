@@ -1,8 +1,8 @@
 package com.example.foodchest.data.database
 
 import androidx.room.*
-import com.example.foodchest.data.database.entites.FavoritesEntity
-import com.example.foodchest.data.database.entites.RecipesEntity
+import com.example.foodchest.data.database.entities.FavoritesEntity
+import com.example.foodchest.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

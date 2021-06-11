@@ -6,8 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.example.foodchest.data.Repository
-import com.example.foodchest.data.database.entites.FavoritesEntity
-import com.example.foodchest.data.database.entites.RecipesEntity
+import com.example.foodchest.data.database.entities.FavoritesEntity
+import com.example.foodchest.data.database.entities.RecipesEntity
 import com.example.foodchest.models.FoodRecipe
 import com.example.foodchest.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +39,7 @@ class MainViewModel @Inject  constructor(
             repository.local.insertFavoriteRecipes(favoritesEntity)
         }
 
-    private fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) =
+    fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteFavoriteRecipe(favoritesEntity)
         }
