@@ -36,4 +36,5 @@
     <string name="diary_free">Diary Free</string>
     <string name="save_to_favorite">Save to Favorite</string>
     <string name="no_favorite_recipes">No Favorite Recipes</string>
+    <string name="delete_favorite_menu">Delete Favorite Menu</string>
 </resources>

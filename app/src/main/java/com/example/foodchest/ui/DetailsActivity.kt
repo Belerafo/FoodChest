@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.foodchest.R
+import com.example.foodchest.R.id.save_to_favorite_menu
 import com.example.foodchest.adapter.PagerAdapter
 import com.example.foodchest.data.database.entities.FavoritesEntity
 import com.example.foodchest.ui.fragments.ingredients.IngredientsFragment
@@ -65,7 +66,7 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        val menuItem = menu?.findItem(R.id.save_to_favorite_menu)
+        val menuItem = menu?.findItem(save_to_favorite_menu)
         checkSavedRecipes(menuItem!!)
         return true
     }
@@ -74,9 +75,9 @@ class DetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
-        } else if (item.itemId == R.id.save_to_favorite_menu && !recipeSave) {
+        } else if (item.itemId == save_to_favorite_menu && !recipeSave) {
             saveToFavorites(item)
-        } else if (item.itemId == R.id.save_to_favorite_menu && recipeSave) {
+        } else if (item.itemId == save_to_favorite_menu && recipeSave) {
             removedFromFavorites(item)
         }
         return super.onOptionsItemSelected(item)
@@ -91,7 +92,7 @@ class DetailsActivity : AppCompatActivity() {
                         savedRecipeId = savedRecipe.id
                         recipeSave = true
                     } else {
-                        changeMenuItemColor(menuItem, R.color.white)
+                        changeMenuItemColor(menuItem, R.color.lightMediumGrey)
                     }
                 }
             } catch (e: Exception) {
@@ -119,7 +120,7 @@ class DetailsActivity : AppCompatActivity() {
                 args.result
             )
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
-        changeMenuItemColor(item, R.color.white)
+        changeMenuItemColor(item, R.color.lightMediumGrey)
         showSnackBar("Removed from Favorites")
         recipeSave = false
     }
