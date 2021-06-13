@@ -2,6 +2,7 @@ package com.example.foodchest.data
 
 import com.example.foodchest.data.database.RecipesDao
 import com.example.foodchest.data.database.entities.FavoritesEntity
+import com.example.foodchest.data.database.entities.FoodJokeEntity
 import com.example.foodchest.data.database.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,8 +19,16 @@ class LocalDataSource @Inject constructor(
         return recipesDao.readFavoriteRecipes()
     }
 
+    fun readFoodJoke(): Flow<List<FoodJokeEntity>>{
+        return recipesDao.readFoodJoke()
+    }
+
     suspend fun insertRecipes(recipesEntity: RecipesEntity){
         recipesDao.insertRecipes(recipesEntity)
+    }
+
+    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity){
+        recipesDao.insertFoodJoke(foodJokeEntity)
     }
     suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity){
         recipesDao.insertFavoriteRecipe(favoritesEntity)
@@ -32,6 +41,8 @@ class LocalDataSource @Inject constructor(
     suspend fun deleteAllFavoriteRecipes(){
         recipesDao.deleteAllFavoriteRecipes()
     }
+
+
 
 
 }
