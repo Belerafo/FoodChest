@@ -2,6 +2,7 @@ package com.example.foodchest.adapter
 
 import android.graphics.Color
 import android.view.*
+import androidx.annotation.MainThread
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -12,14 +13,20 @@ import com.example.foodchest.data.database.entities.FavoritesEntity
 import com.example.foodchest.databinding.FavoriteRecipesRowLayoutBinding
 import com.example.foodchest.ui.fragments.favorite.FavoriteRecipesFragmentDirections
 import com.example.foodchest.util.RecipesDiffUtil
+import com.example.foodchest.viewmodels.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.favorite_recipes_row_layout.view.*
 import kotlinx.android.synthetic.main.recipes_row_layout.view.*
 
 class FavoriteRecipeAdapter(
-    private val requireActivity: FragmentActivity
+    private val requireActivity: FragmentActivity,
+    private val mainViewModel: MainViewModel
 ) : RecyclerView.Adapter<FavoriteRecipeAdapter.MyViewHolder>(), ActionMode.Callback {
 
     private var multiSelection = false
+
+    private lateinit var mActionMode: ActionMode
+    private lateinit var rootView: View
 
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
     private var myViewHolder = arrayListOf<MyViewHolder>()
@@ -47,6 +54,7 @@ class FavoriteRecipeAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        rootView = holder.itemView.rootView
         myViewHolder.add(holder)
 
         val currentRecipe = favoriteRecipes[position]
@@ -88,19 +96,35 @@ class FavoriteRecipeAdapter(
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+            applyActionModeTitle()
         } else {
             selectedRecipes.add(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.primaryColor)
+            applyActionModeTitle()
         }
     }
 
     private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
-        holder.itemView.favoriteRecipesRowLayout.setBackgroundColor(
+        holder.itemView.favoriteRecipesCardRowLayout.setBackgroundColor(
             ContextCompat.getColor(requireActivity, backgroundColor)
         )
 
         holder.itemView.favorite_row_cardView.strokeColor =
             ContextCompat.getColor(requireActivity, strokeColor)
+    }
+
+    private fun applyActionModeTitle() {
+        when (selectedRecipes.size) {
+            0 -> {
+                mActionMode.finish()
+            }
+            1 -> {
+                mActionMode.title = "${selectedRecipes.size} item selected"
+            }
+            else -> {
+                mActionMode.title = "${selectedRecipes.size} items selected"
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -109,6 +133,7 @@ class FavoriteRecipeAdapter(
 
     override fun onCreateActionMode(actionMode: ActionMode?, menu: Menu?): Boolean {
         actionMode?.menuInflater?.inflate(R.menu.favorite_contextual_menu, menu)
+        mActionMode = actionMode!!
         applyStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
@@ -118,6 +143,15 @@ class FavoriteRecipeAdapter(
     }
 
     override fun onActionItemClicked(actionMode: ActionMode?, menu: MenuItem?): Boolean {
+        if (menu?.itemId == R.id.delete_favorite_recipe_menu) {
+            selectedRecipes.forEach {
+                mainViewModel.deleteFavoriteRecipe(it)
+            }
+            showSnackBar("${selectedRecipes.size} Recipe/s removed.")
+            multiSelection = false
+            selectedRecipes.clear()
+            actionMode?.finish()
+        }
         return true
     }
 
@@ -141,6 +175,21 @@ class FavoriteRecipeAdapter(
         val diffUtilResult = DiffUtil.calculateDiff(favoriteRecipesDiffUtil)
         favoriteRecipes = newFavoriteRecipes
         diffUtilResult.dispatchUpdatesTo(this)
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(
+            rootView,
+            message,
+            Snackbar.LENGTH_SHORT
+        ).setAction("Okey") {}
+            .show()
+    }
+
+    fun clearContextualActionMode(){
+        if(this::mActionMode.isInitialized){
+            mActionMode.finish()
+        }
     }
 }
 
