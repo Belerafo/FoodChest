@@ -38,4 +38,8 @@
     <string name="no_favorite_recipes">No Favorite Recipes</string>
     <string name="delete_favorite_menu">Delete Favorite Menu</string>
     <string name="delete_all">Delete All</string>
+
+    <string name="simple_text">Please, enter the email address where you wish to receive our answer. If you are a registered user of flaticon, please include the email address you used when you registered if possible to help us locate your account as soon as possible.
+
+</string>
 </resources>
