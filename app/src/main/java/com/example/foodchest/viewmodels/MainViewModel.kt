@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import com.example.foodchest.data.Repository
 import com.example.foodchest.data.database.entities.FavoritesEntity
 import com.example.foodchest.data.database.entities.RecipesEntity
+import com.example.foodchest.models.FoodJoke
 import com.example.foodchest.models.FoodRecipe
 import com.example.foodchest.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,15 +20,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 //@ActivityRetainedScoped
-class MainViewModel @Inject  constructor(
+class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
-): AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     /** ROOM DATABASE */
 
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
-    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> = repository.local.readFavoriteRecipes().asLiveData()
+    val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
+        repository.local.readFavoriteRecipes().asLiveData()
 
     private fun insertRecipes(recipesEntity: RecipesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,8 +52,9 @@ class MainViewModel @Inject  constructor(
         }
 
     /** RETROFIT */
-    var recipesResponse : MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     var searchRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    var foodJokeResponse: MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)
@@ -61,37 +64,57 @@ class MainViewModel @Inject  constructor(
         searchRecipesSafeCall(searchQuery)
     }
 
+    fun getFoodJoke(apiKey: String) = viewModelScope.launch {
+        getFoodJokeSafeCall(apiKey)
+    }
+
+
+
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
-        recipesResponse.value = NetworkResult.Loading()
-        if (hasInternetConnection()){
-            try {
-                val response = repository.remote.getRecipes(queries)
-                recipesResponse.value = handleFoodRecipesResponse(response)
+            recipesResponse.value = NetworkResult.Loading()
+            if (hasInternetConnection()) {
+                try {
+                    val response = repository.remote.getRecipes(queries)
+                    recipesResponse.value = handleFoodRecipesResponse(response)
 
-                val foodRecipe = recipesResponse.value!!.data
-                if(foodRecipe != null){
-                    offlineCacheRecipes(foodRecipe)
+                    val foodRecipe = recipesResponse.value!!.data
+                    if (foodRecipe != null) {
+                        offlineCacheRecipes(foodRecipe)
+                    }
+                } catch (e: Exception) {
+                    recipesResponse.value = NetworkResult.Error("Recipes not found.")
                 }
-            }catch (e: Exception){
-                recipesResponse.value = NetworkResult.Error("Recipes not found.")
+            } else {
+                recipesResponse.value = NetworkResult.Error("No Internet Connection.")
             }
-        }else {
-            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
         }
-    }
 
     private suspend fun searchRecipesSafeCall(searchQuery: Map<String, String>) {
         searchRecipesResponse.value = NetworkResult.Loading()
-        if (hasInternetConnection()){
+        if (hasInternetConnection()) {
             try {
                 val response = repository.remote.searchRecipes(searchQuery)
                 searchRecipesResponse.value = handleFoodRecipesResponse(response)
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 searchRecipesResponse.value = NetworkResult.Error("Recipes not found.")
             }
-        }else {
+        } else {
             searchRecipesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+    private suspend fun getFoodJokeSafeCall(apiKey: String) {
+
+        foodJokeResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.getFoodJoke(apiKey)
+                foodJokeResponse.value = handleFoodJokeResponse(response)
+            } catch (e: Exception) {
+                foodJokeResponse.value = NetworkResult.Error("Recipes not found.")
+            }
+        } else {
+            foodJokeResponse.value = NetworkResult.Error("No Internet Connection.")
         }
     }
 
@@ -101,9 +124,9 @@ class MainViewModel @Inject  constructor(
     }
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
-        when{
+        when {
             response.message().toString().contains("timeout") -> {
-                return  NetworkResult.Error("Timeout")
+                return NetworkResult.Error("Timeout")
             }
             response.code() == 402 -> {
                 return NetworkResult.Error("API key Limited.")
@@ -118,22 +141,39 @@ class MainViewModel @Inject  constructor(
             else -> {
                 return NetworkResult.Error(response.message())
             }
+        }
     }
-    }
-
-    private fun hasInternetConnection(): Boolean{
-            val connectivityManager = getApplication<Application>().getSystemService(
-                Context.CONNECTIVITY_SERVICE
-            ) as ConnectivityManager
-            val activeNetwork = connectivityManager.activeNetwork ?: return false
-            val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-            return when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
-
+    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
+        return when {
+            response.message().toString().contains("timeout") -> {
+                NetworkResult.Error("Timeout")
             }
+            response.code() == 402 -> {
+                NetworkResult.Error("API key Limited.")
+            }
+            response.isSuccessful -> {
+                val foodJoke = response.body()
+                NetworkResult.Success(foodJoke!!)
+            }
+            else -> {
+                NetworkResult.Error(response.message())
+            }
+        }
+    }
+
+    private fun hasInternetConnection(): Boolean {
+        val connectivityManager = getApplication<Application>().getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
 
         }
+
+    }
 }
