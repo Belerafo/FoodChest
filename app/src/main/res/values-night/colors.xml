@@ -10,8 +10,9 @@
     <color name="lightGrey">#FFf5f5f5</color>
     <color name="mediumGrey">#FFc2c2c2</color>
     <color name="lightMediumGrey">#FFa2a2a2</color>
-    <color name="dark">#FF453D3D</color>
-    <color name="darker">#FF231E1E</color>
+    <color name="lightBlack">#151515</color>
+    <color name="dark">#404040</color>
+    <color name="darker">#1B1B1B</color>
     <color name="darkGrey">#C1C1C1</color>
     <color name="darkerGrey">#323030</color>
     <color name="red">#FFFF0000</color>
@@ -39,12 +40,12 @@
     <color name="titleColor">@color/mediumGrey</color>
 
     <color name="statusBarColor">@color/black</color>
-    <color name="contextualStatusBarColor">@color/darker</color>
+    <color name="contextualStatusBarColor">@color/black</color>
     <color name="contextualActionBarColor">@color/dark</color>
-    <color name="actionBarBackgroundColor">@color/darker</color>
+    <color name="actionBarBackgroundColor">@color/lightBlack</color>
 
     // Custom Bottom Navigation View Style
-    <color name="bottomNavBackground">@color/darker</color>
+    <color name="bottomNavBackground">@color/lightBlack</color>
     <color name="bottomNavItemColor">@color/mediumGrey</color>
     <color name="bottomNavCheckedItemColor">@color/purple_200</color>
 

@@ -10,8 +10,9 @@
     <color name="lightGrey">#FFf5f5f5</color>
     <color name="mediumGrey">#FFc2c2c2</color>
     <color name="lightMediumGrey">#FFa2a2a2</color>
-    <color name="dark">#FF453D3D</color>
-    <color name="darker">#FF231E1E</color>
+    <color name="lightBlack">#151515</color>
+    <color name="dark">#404040</color>
+    <color name="darker">#1b1b1b</color>
     <color name="darkGrey">#4C4C4C</color>
     <color name="darkerGrey">#323030</color>
     <color name="red">#D60202</color>

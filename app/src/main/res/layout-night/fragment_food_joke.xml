@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_foodjoke_background"
+        android:background="@drawable/ic_foodjoke_background_dark"
         tools:context=".ui.fragments.foodjoke.FoodJokeFragment">
 
         <com.google.android.material.card.MaterialCardView
@@ -37,7 +37,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/backgroundColor">
+                android:background="@color/cardBackgroundColor">
 
                 <TextView
                     android:id="@+id/food_joke_textView"
