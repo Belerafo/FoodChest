@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchest.R
+import com.example.foodchest.R.color.statusBarColor
 import com.example.foodchest.data.database.entities.FavoritesEntity
 import com.example.foodchest.databinding.FavoriteRecipesRowLayoutBinding
 import com.example.foodchest.ui.fragments.favorite.FavoriteRecipesFragmentDirections
@@ -161,7 +162,7 @@ class FavoriteRecipeAdapter(
         }
         multiSelection = false
         selectedRecipes.clear()
-        applyStatusBarColor(R.color.statusBarColor)
+        applyStatusBarColor(statusBarColor)
     }
 
     private fun applyStatusBarColor(color: Int) {

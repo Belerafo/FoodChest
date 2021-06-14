@@ -101,6 +101,8 @@ class DetailsActivity : AppCompatActivity() {
         })
     }
 
+
+
     private fun saveToFavorites(item: MenuItem) {
         val favoritesEntity =
             FavoritesEntity(

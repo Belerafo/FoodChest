@@ -12,18 +12,18 @@
     <color name="lightMediumGrey">#FFa2a2a2</color>
     <color name="dark">#FF453D3D</color>
     <color name="darker">#FF231E1E</color>
-    <color name="darkGrey">#4C4C4C</color>
+    <color name="darkGrey">#C1C1C1</color>
     <color name="darkerGrey">#323030</color>
-    <color name="red">#D60202</color>
+    <color name="red">#FFFF0000</color>
     <color name="green">#FF62DD6A</color>
     <color name="blue">#FF0000FF</color>
     <color name="yellow">#FFffdf00</color>
     <color name="starLight">#F1F863</color>
-    <color name="nightStroke">#91A37A</color>
+    <color name="nightStroke">#A3877A</color>
 
-    <!-- LIGHT THEME -->
-    
-    <color name="backgroundColor">@color/lightGrey</color>
+    <!-- DARK THEME -->
+
+    <color name="backgroundColor">@color/darkerGrey</color>
 
     // Custom Chip Style
     <color name="checkedChipBackgroundColor">#20ED413D</color>
@@ -33,22 +33,20 @@
 
     // Custom CardView Style
     <color name="descriptionColor">@color/darkGrey</color>
-    <color name="strokeColor">@color/lightMediumGrey</color>
-    <color name="cardBackgroundColor">@color/white</color>
+    <color name="strokeColor">@color/nightStroke</color>
+    <color name="cardBackgroundColor">@color/darker</color>
     <color name="cardBackgroundLightColor">#05ED413D</color>
-    <color name="titleColor">@color/darker</color>
+    <color name="titleColor">@color/mediumGrey</color>
 
-    <color name="statusBarColor">@color/primaryColorVariant</color>
+    <color name="statusBarColor">@color/black</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualActionBarColor">@color/dark</color>
-    <color name="actionBarBackgroundColor">@color/primaryColor</color>
-
+    <color name="actionBarBackgroundColor">@color/darker</color>
 
     // Custom Bottom Navigation View Style
-    <color name="bottomNavBackground">@color/white</color>
+    <color name="bottomNavBackground">@color/darker</color>
     <color name="bottomNavItemColor">@color/mediumGrey</color>
-    <color name="bottomNavCheckedItemColor">@color/primaryColor</color>
-
+    <color name="bottomNavCheckedItemColor">@color/purple_200</color>
 
 
 </resources>
