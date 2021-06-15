@@ -27,10 +27,10 @@
     <color name="backgroundColor">@color/darkerGrey</color>
 
     // Custom Chip Style
-    <color name="checkedChipBackgroundColor">#20ED413D</color>
-    <color name="chipBackgroundColor">@color/lightGrey</color>
-    <color name="checkedChipTextColor">#ED413D</color>
-    <color name="chipTextColor">@color/darkGrey</color>
+    <color name="checkedChipBackgroundColor">@color/dark</color>
+    <color name="chipBackgroundColor">@color/darker</color>
+    <color name="checkedChipTextColor">@color/lightGrey</color>
+    <color name="chipTextColor">@color/lightGrey</color>
 
     // Custom CardView Style
     <color name="descriptionColor">@color/darkGrey</color>
