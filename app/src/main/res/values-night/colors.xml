@@ -25,6 +25,7 @@
     <!-- DARK THEME -->
 
     <color name="backgroundColor">@color/darkerGrey</color>
+    <color name="placeHolderColor">@color/dark</color>
 
     // Custom Chip Style
     <color name="checkedChipBackgroundColor">@color/dark</color>

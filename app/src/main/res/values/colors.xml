@@ -25,6 +25,7 @@
     <!-- LIGHT THEME -->
     
     <color name="backgroundColor">@color/lightGrey</color>
+    <color name="placeHolderColor">@color/mediumGrey</color>
 
     // Custom Chip Style
     <color name="checkedChipBackgroundColor">#20ED413D</color>
