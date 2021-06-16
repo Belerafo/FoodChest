@@ -189,11 +189,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun showShimmerEffect() {
-        binding.recyclerview.showShimmer()
+
+        binding.shimmerFrameLayout.visibility = View.VISIBLE
+        binding.shimmerFrameLayout.startShimmer()
+        binding.recyclerview.visibility = View.GONE
     }
 
     private fun hideShimmerEffect() {
-        binding.recyclerview.hideShimmer()
+
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.INVISIBLE
+        binding.recyclerview.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

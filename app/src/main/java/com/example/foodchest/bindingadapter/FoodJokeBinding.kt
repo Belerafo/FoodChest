@@ -71,7 +71,7 @@ class FoodJokeBinding {
         ){
 
            if(database != null){
-               if (database?.isEmpty()){
+               if (database.isEmpty()){
                    view.visibility = View.VISIBLE
                    if (view is TextView){
                        if (apiResponse != null){
