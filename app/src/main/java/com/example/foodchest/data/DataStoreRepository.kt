@@ -90,11 +90,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             backOnline
         }
 
-    data class MealAndDietType(
-        val selectedMealType: String,
-        val selectedMealTypeId: Int,
-        val selectedDietType: String,
-        val selectedDietTypeId: Int,
-    )
+
 
 }
+data class MealAndDietType(
+    val selectedMealType: String,
+    val selectedMealTypeId: Int,
+    val selectedDietType: String,
+    val selectedDietTypeId: Int,
+)
