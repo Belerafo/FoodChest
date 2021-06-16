@@ -1,8 +1,6 @@
 package com.example.foodchest.adapter
 
-import android.graphics.Color
 import android.view.*
-import androidx.annotation.MainThread
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -16,8 +14,6 @@ import com.example.foodchest.ui.fragments.favorite.FavoriteRecipesFragmentDirect
 import com.example.foodchest.util.RecipesDiffUtil
 import com.example.foodchest.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.favorite_recipes_row_layout.view.*
-import kotlinx.android.synthetic.main.recipes_row_layout.view.*
 
 class FavoriteRecipeAdapter(
     private val requireActivity: FragmentActivity,
@@ -33,7 +29,7 @@ class FavoriteRecipeAdapter(
     private var myViewHolder = arrayListOf<MyViewHolder>()
     private var favoriteRecipes = emptyList<FavoritesEntity>()
 
-    class MyViewHolder(private val binding: FavoriteRecipesRowLayoutBinding) :
+    class MyViewHolder(val binding: FavoriteRecipesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(favoritesEntity: FavoritesEntity) {
@@ -64,7 +60,7 @@ class FavoriteRecipeAdapter(
         /**
          *Single Click Listener
          * */
-        holder.itemView.favoriteRecipesRowLayout.setOnClickListener {
+        holder.binding.favoriteRecipesRowLayout.setOnClickListener {
             if (multiSelection) {
                 applySelection(holder, currentRecipe)
             } else {
@@ -79,7 +75,7 @@ class FavoriteRecipeAdapter(
         /**
          *Long Click Listener
          * */
-        holder.itemView.favoriteRecipesRowLayout.setOnLongClickListener {
+        holder.binding.favoriteRecipesRowLayout.setOnLongClickListener {
             if (!multiSelection) {
                 multiSelection = true
                 requireActivity.startActionMode(this)
@@ -106,11 +102,11 @@ class FavoriteRecipeAdapter(
     }
 
     private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
-        holder.itemView.favoriteRecipesCardRowLayout.setBackgroundColor(
+        holder.binding.favoriteRecipesCardRowLayout.setBackgroundColor(
             ContextCompat.getColor(requireActivity, backgroundColor)
         )
 
-        holder.itemView.favorite_row_cardView.strokeColor =
+        holder.binding.favoriteRowCardView.strokeColor =
             ContextCompat.getColor(requireActivity, strokeColor)
     }
 

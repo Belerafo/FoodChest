@@ -2,10 +2,9 @@ package com.example.foodchest.models
 
 
 import android.os.Parcelable
-import com.example.foodchest.models.ExtendedIngredient
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class Result(
